@@ -50,7 +50,7 @@ public:
     }
   }
   std::string Load(std::string &&key);
-  std::vector<std::string> LoadByKey(std::string &&key);
+  std::vector<std::string> LoadByLabel(std::string &&label);
   bool Save(std::string &&key, std::string &&value);
   bool AddLabel(std::string &&key, std::string &&label);
   bool DelLabel(std::string &&key, std::string &&label);
