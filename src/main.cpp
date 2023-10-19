@@ -12,8 +12,12 @@ struct Alias {
 };
 
 int main(int argc, char **argv) {
+  std::cout << "here" << std::endl;
   CLI::App app{"A command snippet"};
   app.set_help_flag("-h", "Print help message");
+
+  std::string storepath = STOREPATH;
+  app.add_option("-s", storepath, "store path");
 
   // command alias
   auto alias_cmd =
@@ -39,7 +43,7 @@ int main(int argc, char **argv) {
 
   CLI11_PARSE(app, argc, argv);
 
-  command::Store store;
+  command::Store store(std::move(storepath));
 
   if (alias_cmd->parsed()) {
     store.Save(std::move(alias.name), std::move(alias.value));

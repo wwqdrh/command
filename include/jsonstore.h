@@ -14,7 +14,7 @@ using namespace std;
 
 using json = nlohmann::json;
 
-#define STOREPATH "~/.command/store.json"
+#define STOREPATH "~/.command.json"
 
 namespace command {
 

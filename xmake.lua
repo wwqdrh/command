@@ -1,7 +1,8 @@
 set_languages("c++17")
 
-add_requires("gtest")
-add_requires("vcpkg::nlohmann-json", "vcpkg::cli11")
+add_rules("mode.debug", "mode.release")
+
+add_requires("gtest", "vcpkg::nlohmann-json", "vcpkg::cli11")
 
 target("c")
     set_kind("binary")
