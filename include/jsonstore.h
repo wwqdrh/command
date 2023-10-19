@@ -2,6 +2,7 @@
 #define STORE_H
 
 #include <fstream>
+#include <ios>
 #include <iostream>
 #include <mutex>
 #include <string>
@@ -13,26 +14,33 @@ using namespace std;
 
 using json = nlohmann::json;
 
+#define STOREPATH "~/.command/store.json"
+
 namespace command {
+
 class Store {
 private:
-  std::string jsonFile = "~/.command/store.json";
+  std::string jsonFile;
   std::mutex mutex_;
   json data; // 用于存储json数据的变量
 
 public:
-  Store(std::string &&p = "~/.command/store.json") : jsonFile(p) {
-    ifstream file(jsonFile);
-    if (file.is_open()) {
-      file >> data; // 将json数据存储到data变量中
-      file.close();
+  Store(std::string &&p = STOREPATH) : jsonFile(p) {
+    ifstream f(jsonFile);
+    if (f.is_open()) {
+      f >> data; // 将json数据存储到data变量中
+      f.close();
     } else {
+      fstream file;
+      file.open(jsonFile, ios::out);
+      file.close();
+
       data = nlohmann::json::object();
       // 将空的json对象写入文件中
-      ofstream file(jsonFile);
-      if (file.is_open()) {
-        file << data;
-        file.close();
+      ofstream f(jsonFile);
+      if (f.is_open()) {
+        f << data;
+        f.close();
       } else {
         cout << "无法打开文件" << endl;
       }
