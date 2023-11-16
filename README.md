@@ -1,5 +1,11 @@
 # usage
 
+```bash
+mkdir -p $HOME"/cache/packages/command"
+
+docker run -d --env-file ./docker.env --name command -p 2002:22 -v $(pwd):/code -v $HOME"/cache/packages/command":/root/.xmake/packages hrdqww/dev-c
+```
+
 `dependency`
 
 - vcpkg

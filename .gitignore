@@ -2,6 +2,7 @@ build
 .cache
 .DS_Store
 .vscode
+docker.env
 
 .xmake
 
